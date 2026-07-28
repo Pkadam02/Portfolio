@@ -1,26 +1,255 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-paper-cream: #f4f1ea;
+  --color-paper-kraft: #d9c7a7;
+  --color-paper-ink: #16130f;
+  --color-[#FF3B30]: #FF3B30;
+  --color-accent-orange: #f5a524;
+  --color-accent-dark-orange: #d97e06;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+  
+  --animate-orbit: orbit 60s linear infinite;
+  --animate-marquee: marquee 30s linear infinite;
+  
+  @keyframes orbit {
+    0% { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
   }
 }
 
+:root {
+  --bg-color: #f2eeeb;
+  --text-color: #16130f;
+  --paper-cream: #ffffff;
+  --paper-kraft: #d9c7a7;
+  --paper-ink: #1b1712;
+  --accent-color: #d97e06;
+  --border-color: rgba(22, 19, 15, 0.12);
+}
+
+[data-theme="dark"] {
+  --bg-color: #f2eeeb;
+  --text-color: #16130f;
+}
+
+html {
+  scroll-behavior: initial;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.5s ease, color 0.5s ease;
+  overflow-x: hidden;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(22, 19, 15, 0.25);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d97e06;
+}
+
+/* Lenis Smooth Scroll resets */
+html.lenis {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overflow: clip;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ========================================================
+   ELLUSION CRUMPLED PAPER DESIGN SYSTEM
+   ======================================================== */
+
+/* Paper Ragged Polygon Clip Path */
+.paper-clip {
+  clip-path: polygon(
+    0% 3%, 14.3% 2.5%, 28.6% 2.1%, 42.9% 1.9%, 57.1% 1.5%, 71.4% 1.3%, 85.7% 1.6%, 100% 3%,
+    97% 20%, 97.9% 40%, 98.5% 60%, 98.5% 80%, 96.6% 100%,
+    85.7% 96.3%, 71.4% 96.1%, 57.1% 97.9%, 42.9% 96.7%, 28.6% 98.5%, 14.3% 95.9%, 0% 96.2%,
+    3.9% 80%, 1.9% 60%, 3% 40%, 2.4% 20%
+  );
+}
+
+/* Paper Card Container */
+.paper-card {
+  position: relative;
+  display: inline-block;
+  padding: 1.6em 1.8em;
+  transform: rotate(var(--rot, 0deg)) scale(1);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.paper-card:hover {
+  transform: rotate(calc(var(--rot, 0deg) * -0.5)) translateY(-4px);
+}
+
+/* Paper Card Tones */
+.paper-cream {
+  background: #ffffff;
+  color: #16130f;
+  border: 1px solid rgba(22, 19, 15, 0.1);
+}
+.paper-cream .paper-num { color: #d97e06; }
+
+.paper-kraft {
+  background: #d9c7a7;
+  color: #16130f;
+  border: 1px solid rgba(22, 19, 15, 0.1);
+}
+.paper-kraft .paper-num { color: #a2440a; }
+
+.paper-ink {
+  background: #1b1712;
+  color: #f4f1ea;
+  border: 1px solid rgba(244, 241, 234, 0.12);
+}
+.paper-ink .paper-num { color: #f5a524; }
+
+/* Paper Shadow */
+.paper-shadow {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform: translate(7px, 9px);
+  background: rgba(22, 19, 15, 0.18);
+  pointer-events: none;
+}
+
+/* Corner Tape Strip */
+.tape-strip {
+  position: absolute;
+  top: -8px;
+  left: 14px;
+  width: 54px;
+  height: 18px;
+  background: rgba(244, 241, 234, 0.65);
+  transform: rotate(-4deg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.tape-strip-right {
+  position: absolute;
+  top: -8px;
+  right: 14px;
+  width: 54px;
+  height: 18px;
+  background: rgba(244, 241, 234, 0.65);
+  transform: rotate(4deg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Crumpled Paper Creases & Folds SVG Overlay */
+.crumpled-texture {
+  background-image: 
+    radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.7) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(0, 0, 0, 0.05) 0%, transparent 60%),
+    linear-gradient(135deg, rgba(0, 0, 0, 0.03) 25%, transparent 25%),
+    linear-gradient(225deg, rgba(0, 0, 0, 0.03) 25%, transparent 25%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%);
+  background-size: 100% 100%, 100% 100%, 300px 300px, 300px 300px, 200px 200px;
+}
+
+/* Ellusion Pill Badge */
+.pill-badge {
+  border: 1px solid rgba(22, 19, 15, 0.2);
+  background: rgba(22, 19, 15, 0.05);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #16130f;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.pill-badge:hover {
+  border-color: #d97e06;
+  color: #d97e06;
+  background: rgba(217, 126, 6, 0.1);
+}
+
+/* Marquee infinite scroll container */
+.marquee-container {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: 2rem;
+}
+.marquee-content {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  min-width: 100%;
+  gap: 2rem;
+  animation: marquee 30s linear infinite;
+}
+
+/* ========================================================
+   SLOGAN BANNER & CRUMPLE RITUAL ANIMATIONS
+   ======================================================== */
+
+@keyframes slg-scrib {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes slg-write {
+  from {
+    -webkit-mask-position: 73% 0;
+    mask-position: 73% 0;
+  }
+  to {
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+}
+
+@keyframes crd-wig {
+  from { transform: rotate(-8deg); }
+  to { transform: rotate(8deg); }
+}
+
+.crd-note-hover:hover .crd-ball {
+  animation: crd-wig 0.5s ease infinite alternate;
 }
