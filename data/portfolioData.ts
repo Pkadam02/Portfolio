@@ -148,14 +148,6 @@ export const portfolioData = {
       grade: "CGPA: 7.77 (First Class with Distinction)",
       location: "Pune, India",
     },
-    {
-      id: "edu-2",
-      institution: "Modern College of Arts, Science and Commerce",
-      degree: "12th PCM",
-      period: "2018 - 2020",
-      grade: "61.38% (First Class)",
-      location: "Pune, India",
-    },
   ] as Education[],
   certifications: [
     { name: "Full Stack Java Developer", issuer: "Advanto Software" },
