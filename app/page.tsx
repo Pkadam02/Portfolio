@@ -17,37 +17,37 @@ export default function Home() {
     <div className="w-full flex flex-col relative z-10 overflow-hidden bg-transparent">
       {/* 1. Ellusion Hero Headline Block */}
       <Hero />
-      
-      {/* 2. Selected Works & Case Study Mockups */}
+
+      {/* 2. Selected Works & Case Study Mockupss */}
       <Projects />
-      
+
       {/* 3. From Draft To Production Step Sequence */}
       <ProcessSequence />
-      
+
       {/* 4. Biography & Academic Credentials */}
       <About />
-      
+
       {/* 5. Three Pillars & Orbit Tech Directory */}
       <Skills />
-      
+
       {/* 6. Process Methodology (01 DRAFT, 02 CODE, 03 SCALE) */}
       <Methodology />
-      
+
       {/* 7. Capabilities & Workshop Services */}
       <Services />
-      
+
       {/* 8. Work History & Career Milestones */}
       <Experience />
-      
+
       {/* 9. Leadership & Mentorship Metrics */}
       <Leadership />
-      
+
       {/* 10. Peer Endorsements Slider */}
       <Testimonials />
-      
+
       {/* 11. Engineering Insights & Write-ups */}
       <Blogs />
-      
+
       {/* 12. Electronic Dispatch Contact & Calendly Sync */}
       <Contact />
     </div>
